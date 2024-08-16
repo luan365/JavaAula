@@ -17,6 +17,13 @@ public class Date{
         return false;
     }
 
+    public Date (byte day, byte month, short year) throws Exception{
+        if(!Date.isValid(day, month, year) throw new Exception("Invalid date"));
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
+
     private static boolean isValid(byte day, byte month, short year){
         if(year < -45 || year == 0) return false;
 
