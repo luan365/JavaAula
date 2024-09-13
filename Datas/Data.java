@@ -194,12 +194,7 @@ public class Data implements Comparable <Data>, Cloneable{
 
         return 0;
     }
-    @Override
-    public String toString() {
-        return (dia < 9? "0" + dia : dia) + "/" + 
-               (mes < 9? "0" + mes : mes) + "/" + ano;
-    }
-    
+
     /*public Data getVariosDiasAdiante (int qtd) // não altera o this
     {      // faça
     }
@@ -211,4 +206,20 @@ public class Data implements Comparable <Data>, Cloneable{
     public Data getVariosDiasAtras (int qtd) // não altera o this
     {      // faça
     }*/
+
+    @Override
+    public String toString() {
+        return (dia < 9? "0" + dia : dia) + "/" + 
+               (mes < 9? "0" + mes : mes) + "/" + 
+               (ano < 9? "0" + ano: ano);
+    }
+    @Override
+    public Object clone() {
+        Data ret = null;
+        try{
+            ret = new Data(this);
+        }
+        catch(Exception erro) {}
+        return ret;
+    }
 }
