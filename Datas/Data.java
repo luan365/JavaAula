@@ -1,10 +1,28 @@
 /* Nunca printar nada, a não ser que seja na Main ou uma classe exclusiva para isso **/
 
-public class Data{
+public class Data implements Comparable <Data>, Cloneable{
 
     private byte dia, mes; // 0 to 255
     private short ano; // -32,768 to 32,767
-
+    
+    public /*void*/ Data (byte dia, byte mes, short ano) throws Exception
+    {
+        if (!Data.isValida(dia,mes,ano)) throw new Exception ("Data invalida");
+        
+        this.dia=dia;
+        this.mes=mes;
+        this.ano=ano;
+    }
+    //Construtor de cópia, é auxiliar para o clone
+    public /*void*/ Data (Data modelo) throws Exception
+    {
+        if (modelo == null) throw new Exception ("Modelo invalido");
+        
+        this.dia=modelo.dia;
+        this.mes=modelo.mes;
+        this.ano=modelo.ano;
+    }
+    
     private static boolean isBissexto (short ano){
         // Calendário Juliano
         if(ano < 1582)
@@ -16,16 +34,7 @@ public class Data{
         if(ano % 4 == 0 && ano % 100 != 0) return true;
         return false;
     }
-
-    public /*void*/ Data (byte dia, byte mes, short ano) throws Exception
-    {
-        if (!Data.isValida(dia,mes,ano))
-            throw new Exception ("Data invalida");
-
-        this.dia=dia;
-        this.mes=mes;
-        this.ano=ano;
-    }
+    
     private static boolean isValida(byte dia, byte mes, short ano){
         if(ano < -45 || ano == 0) return false;
 
@@ -105,7 +114,50 @@ public class Data{
     }
 
     public void retrocedaUmDia () // altera o this
-    {      // faça
+    {     
+        if(this.ano==1 && this.mes==1 && this.dia==1)
+            {
+                this.dia=(byte)31;
+                this.mes=(byte)12;
+                this.ano=(short)-1;
+            }
+
+        else if (Data.isValida((byte)(this.dia-1),this.mes,this.ano))
+            this.dia--;
+
+        else if (Data.isValida((byte)31,(byte)(this.mes-1),this.ano))
+        {
+            this.dia=(byte)31;
+            this.mes--;
+        }
+
+        else if (Data.isValida((byte)30,(byte)(this.mes-1),this.ano))
+        {
+            this.dia=(byte)30;
+            this.mes--;
+        }
+        
+        else if (Data.isValida((byte)29,(byte)(this.mes-1),this.ano))
+        {
+            this.dia=(byte)29;
+            this.mes--;
+        } 
+        
+        else if (Data.isValida((byte)28,(byte)(this.mes-1),this.ano))
+        {
+            this.dia=(byte)28;
+            this.mes--;
+        } 
+
+        else if (Data.isValida((byte)31,(byte)12,(short)(this.ano-1)))
+        {
+            this.dia=(byte)31;
+            this.mes=(byte)12;
+            this.ano--;
+        }
+        else if (this.ano==1582 && this.mes==10 && this.dia==15)
+            this.dia=(byte)4;
+        
     }
 
     
@@ -128,6 +180,25 @@ public class Data{
             return new Data ((byte)15,this.mes,this.ano);
         }}}
     }
+
+    @Override
+    public int compareTo(Data d) {
+        if(this.ano > d.ano) return 1;
+        if(this.ano < d.ano) return -1;
+        
+        if(this.mes > d.mes) return 1;
+        if(this.mes < d.mes) return -1;
+
+        if(this.dia > d.dia) return 1;
+        if(this.dia < d.dia) return -1;
+
+        return 0;
+    }
+    @Override
+    public String toString() {
+        return (dia < 9? "0" + dia : dia) + "/" + 
+               (mes < 9? "0" + mes : mes) + "/" + ano;
+    }
     
     /*public Data getVariosDiasAdiante (int qtd) // não altera o this
     {      // faça
@@ -140,4 +211,4 @@ public class Data{
     public Data getVariosDiasAtras (int qtd) // não altera o this
     {      // faça
     }*/
-    }
+}

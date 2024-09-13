@@ -168,12 +168,7 @@ public class Horario
                 ret.horas--;
             }
         }
-        // modificar o ret para avancar qtdSegundos
         return ret;
-        //dar exceção se qtdSegundos<=0
     }
 
 }
-
-// faça uma classe Main para testar
-    
