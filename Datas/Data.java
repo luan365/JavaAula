@@ -209,9 +209,14 @@ public class Data implements Comparable <Data>, Cloneable{
 
     @Override
     public String toString() {
-        return (dia < 9? "0" + dia : dia) + "/" + 
-               (mes < 9? "0" + mes : mes) + "/" + 
-               (ano < 9? "0" + ano: ano);
+        Byte getDia = getDia(), getMes = getMes();
+        Short getAno = getAno();
+
+        String strDia = getDia <= 9? "0" + dia : Byte.toString(getDia); 
+        String strMes = getMes <= 9? "0" + mes : Byte.toString(getMes); 
+        String strAno = getAno <= 9? "0" + ano : Short.toString(getAno); 
+
+        return strDia + "/" + strMes + "/" + strAno;
     }
     @Override
     public Object clone() {

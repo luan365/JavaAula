@@ -171,4 +171,16 @@ public class Horario
         return ret;
     }
 
+    @Override
+    public String toString(){
+        Byte getSegundos = getSegundos(), getMinutos = getMinutos();
+        short getHoras = getHoras();
+        
+        String strSegundos = getSegundos <= 9? "0" + getSegundos : Byte.toString(getSegundos);
+        String strMinutos = getMinutos <= 9? "0" + getMinutos : Byte.toString(getMinutos);
+        String strHoras = getHoras <= 9? "0" + getHoras : Short.toString(getHoras);
+
+        return  strHoras + ":" + strMinutos + ":" + strSegundos;
+    }
+
 }
