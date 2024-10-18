@@ -78,8 +78,8 @@ public class Conjunto <X>
             this.elem[posicao] = x;
             
         this.qtd++;
-    }
-    
+    } 
+     
     public X getElemento (int posicao) throws Exception
     {
 	if (posicao<0 || posicao>=this.qtd) throw new Exception ("Posicao invalida");
