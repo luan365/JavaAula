@@ -83,6 +83,34 @@ public class Horario
     }
 
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + segundos;
+        result = prime * result + minutos;
+        result = prime * result + horas;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Horario other = (Horario) obj;
+        if (segundos != other.segundos)
+            return false;
+        if (minutos != other.minutos)
+            return false;
+        if (horas != other.horas)
+            return false;
+        return true;
+    }
+
     public void atrase (int qtdSegundos) throws Exception
     {
         if(qtdSegundos <= 0)
@@ -180,7 +208,7 @@ public class Horario
         String strMinutos = getMinutos <= 9? "0" + getMinutos : Byte.toString(getMinutos);
         String strHoras = getHoras <= 9? "0" + getHoras : Short.toString(getHoras);
 
-        return  strHoras + ":" + strMinutos + ":" + strSegundos;
+        return strHoras + ":" + strMinutos + ":" + strSegundos;
     }
 
 }

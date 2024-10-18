@@ -27,11 +27,6 @@ public class Angulo {
         return angulo * Math.PI / 180;
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
     public void setValorEmGraus (double angulo){
         this.angulo = angulo;
     }
